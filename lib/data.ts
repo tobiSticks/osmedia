@@ -8,9 +8,9 @@ export const siteConfig = {
   phone: "+234 703 921 4242",
   location: "OSMedia Photo Studio, Abuja — available for travel",
   mapsUrl: "https://maps.app.goo.gl/LHpztjmcu1nuPRDP8",
-  instagram: "https://instagram.com/osmediacreation",
-  facebook: "https://facebook.com/osmediacreation",
-  pinterest: "https://pinterest.com/osmediacreation",
+  instagram: "https://www.instagram.com/abuja_osmediacreation?igsh=MTYwOWw5eTJyYWdi&utm_source=qr",
+  facebook: "https://www.facebook.com/OSdigitalEye",
+  // pinterest: "https://pinterest.com/osmediacreation",
 };
 
 export type Category = "commercial" | "maternity" | "wedding" | "corporate";
@@ -241,36 +241,21 @@ export type Reel = {
   poster: string;
   video: string;
   duration: string;
+  likes: number;
+  comments: number;
+  shares: number;
 };
 
 export const reels: Reel[] = [
   {
-    title: "Wedding Film — Golden Hour",
-    category: "wedding",
-    poster: "/images/wedding/wedding-14.jpg",
-    video: "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4",
-    duration: "3:42",
-  },
-  {
-    title: "Corporate Conference Recap",
-    category: "corporate",
-    poster: "/images/corporate/event-04.jpg",
-    video: "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
-    duration: "1:47",
-  },
-  {
-    title: "Brand Reel — Behind the Scenes",
+    title: "Couple Shoot — Behind the Frames",
     category: "commercial",
-    poster: "/images/commercial/client-58.jpg",
-    video: "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4",
-    duration: "0:45",
-  },
-  {
-    title: "Maternity Film — Bump to Baby",
-    category: "maternity",
-    poster: "/images/maternity/client-21.jpg",
-    video: "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4",
-    duration: "1:58",
+    poster: "/videos/coupleshoot-osm-poster.jpg",
+    video: "/videos/coupleshoot-osm.mp4",
+    duration: "0:51",
+    likes: 2347,
+    comments: 186,
+    shares: 412,
   },
 ];
 
