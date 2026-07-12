@@ -63,7 +63,14 @@ export default function ContactPage() {
                   <MapPin size={18} className="mt-0.5 shrink-0 text-gold" />
                   <div>
                     <p className="text-xs uppercase tracking-widest-xl text-stone">Location</p>
-                    <p className="text-sm text-ink">{siteConfig.location}</p>
+                    <a
+                      href={siteConfig.mapsUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-sm text-ink hover:text-gold"
+                    >
+                      {siteConfig.location}
+                    </a>
                   </div>
                 </li>
               </ul>

@@ -4,9 +4,10 @@ export const siteConfig = {
   tagline: "Commercial & Studio Photography",
   description:
     "OSmedia Creation is a commercial studio photography and film house — specializing in studio, maternity, wedding and corporate work, built on a foundation of clean light and honest storytelling.",
-  email: "hello@osmediacreation.com",
-  phone: "+234 801 234 5678",
-  location: "Lagos, Nigeria — available for travel",
+  email: "osmediaphotography@gmail.com",
+  phone: "+234 703 921 4242",
+  location: "OSMedia Photo Studio, Abuja — available for travel",
+  mapsUrl: "https://maps.app.goo.gl/LHpztjmcu1nuPRDP8",
   instagram: "https://instagram.com/osmediacreation",
   facebook: "https://facebook.com/osmediacreation",
   pinterest: "https://pinterest.com/osmediacreation",
