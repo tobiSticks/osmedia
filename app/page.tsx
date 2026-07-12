@@ -97,8 +97,8 @@ export default function Home() {
             </Reveal>
             <Reveal delay={150} className="relative aspect-[4/5] w-full">
               <Image
-                src="/images/commercial/client-07.jpg"
-                alt="Studio portrait of a Senior Advocate in ceremonial legal robes"
+                src="/images/about/author.jpg"
+                alt="Portrait of the photographer behind OSmedia Creation"
                 fill
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 className="object-cover"
