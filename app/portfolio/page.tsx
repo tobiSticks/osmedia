@@ -13,7 +13,7 @@ export default function PortfolioPage() {
   return (
     <>
       <PageHero
-        image="/images/wedding/wedding-04.jpg"
+        image="/images/wedding/wedding-20.jpg"
         eyebrow="Portfolio"
         title="A collection of moments, well kept."
         subtitle="Commercial studio, maternity, weddings and corporate events — filter by category to explore the archive."

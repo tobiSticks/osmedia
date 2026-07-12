@@ -147,7 +147,7 @@ export default function AboutPage() {
 
       <section className="relative overflow-hidden bg-ink py-28">
         <Image
-          src="/images/wedding/wedding-06.jpg"
+          src="/images/wedding/wedding-13.jpg"
           alt=""
           fill
           sizes="100vw"

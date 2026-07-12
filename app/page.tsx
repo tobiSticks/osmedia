@@ -10,24 +10,24 @@ import { categories, gallery, reels, siteConfig } from "@/lib/data";
 
 const featured = gallery.filter((img) =>
   [
-    "wedding-01",
-    "wedding-06",
+    "wedding-17",
+    "wedding-27",
     "event-04",
     "commercial/client-01",
     "commercial/client-14",
-    "maternity/client-06",
+    "wedding/wedding-16",
     "maternity/client-27",
     "commercial/client-58",
   ].some((id) => img.src.includes(id))
 );
 
 const heroSlides = [
-  { src: "/images/commercial/client-05.jpg", alt: "Studio portrait of a Senior Advocate in ceremonial legal robes" },
-  { src: "/images/maternity/client-06.jpg", alt: "Maternity portrait, couple embracing the bump" },
+  { src: "/images/maternity/client-35.jpg", alt: "Maternity portrait in a black dress" },
+  { src: "/images/commercial/client-24.jpg", alt: "Studio portrait of two young siblings" },
+  { src: "/images/commercial/client-75.jpeg", alt: "Studio portrait in a tie-dye gown and wide-brim hat", position: "50% 25%" },
+  { src: "/images/commercial/client-17.jpg", alt: "Studio portrait of a woman in a birdcage veil" },
   { src: "/images/commercial/client-14.jpg", alt: "Studio portrait of a woman in traditional gele and coral beads" },
-  { src: "/images/maternity/client-27.jpg", alt: "Maternity portrait against an \"M\" lettered backdrop" },
-  { src: "/images/commercial/client-58.jpg", alt: "Studio branding portrait for a personal chef business" },
-  { src: "/images/maternity/client-19.jpg", alt: "Maternity couple portrait in an evening gown" },
+  { src: "/images/wedding/wedding-29.jpg", alt: "Traditional wedding couple in purple and pink aso-oke", position: "50% 32%" },
 ];
 
 export default function Home() {

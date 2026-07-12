@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 
-export type Slide = { src: string; alt: string };
+export type Slide = { src: string; alt: string; position?: string };
 
 const SLIDE_DURATION = 2800;
 
@@ -54,6 +54,7 @@ export default function HeroSlideshow({ slides }: { slides: Slide[] }) {
             priority={index === 0}
             sizes="100vw"
             className="object-cover"
+            style={{ objectPosition: slides[index].position ?? "50% 50%" }}
           />
         </motion.div>
       </AnimatePresence>
