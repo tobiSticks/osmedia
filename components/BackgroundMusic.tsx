@@ -4,10 +4,11 @@ import { useEffect, useRef, useState } from "react";
 import { Music, VolumeX } from "lucide-react";
 
 const VOLUME = 0.35;
-const STORAGE_KEY = "osm-bg-music-v2";
+const STORAGE_KEY = "osm-bg-music-v3";
 
 export default function BackgroundMusic() {
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const containerRef = useRef<HTMLDivElement | null>(null);
   const videosPlaying = useRef(0);
   const [enabled, setEnabled] = useState(true);
   const [playing, setPlaying] = useState(false);
@@ -22,6 +23,10 @@ export default function BackgroundMusic() {
 
     const wantsMusic = localStorage.getItem(STORAGE_KEY) !== "off";
     setEnabled(wantsMusic);
+
+    // keep the icon truthful even if the OS pauses/resumes the audio itself
+    audio.addEventListener("play", () => setPlaying(true));
+    audio.addEventListener("pause", () => setPlaying(false));
 
     const tryPlay = () => {
       if (localStorage.getItem(STORAGE_KEY) === "off") return;
@@ -38,7 +43,10 @@ export default function BackgroundMusic() {
     // (browsers refuse audible playback until the visitor interacts once)
     tryPlay();
     const unlockEvents = ["pointerdown", "touchend", "keydown", "wheel"] as const;
-    const onFirstInteraction = () => {
+    const onFirstInteraction = (e: Event) => {
+      // taps on the music button itself are handled by toggle() — acting here
+      // too would start the music and let the click instantly pause it again
+      if (containerRef.current?.contains(e.target as Node)) return;
       if (localStorage.getItem(STORAGE_KEY) === "off" || videosPlaying.current > 0) {
         removeUnlockListeners();
         return;
@@ -92,8 +100,9 @@ export default function BackgroundMusic() {
     const audio = audioRef.current;
     if (!audio) return;
     // if music isn't audibly playing (e.g. autoplay was blocked), the first
-    // click on the button should START it — never silently disable it
-    if (!playing) {
+    // click on the button should START it — never silently disable it.
+    // audio.paused is the source of truth; React state may lag behind.
+    if (audio.paused) {
       setEnabled(true);
       localStorage.setItem(STORAGE_KEY, "on");
       if (videosPlaying.current === 0) {
@@ -113,7 +122,7 @@ export default function BackgroundMusic() {
   const awaitingUnlock = enabled && !playing;
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 flex items-center gap-3">
+    <div ref={containerRef} className="fixed bottom-6 right-6 z-50 flex items-center gap-3">
       {awaitingUnlock && (
         <span className="rounded-full bg-ink/80 px-3 py-1.5 text-xs uppercase tracking-wider text-gold shadow-lg backdrop-blur-sm">
           Tap for sound
