@@ -110,24 +110,36 @@ export default function BackgroundMusic() {
     }
   };
 
+  const awaitingUnlock = enabled && !playing;
+
   return (
-    <button
-      onClick={toggle}
-      aria-label={enabled ? "Turn background music off" : "Turn background music on"}
-      title={enabled ? "Music on — click to turn off" : "Music off — click to turn on"}
-      className={`fixed bottom-6 right-6 z-50 flex h-12 w-12 items-center justify-center rounded-full shadow-lg backdrop-blur-sm transition-all duration-300 ${
-        enabled
-          ? "bg-ink/80 text-gold ring-1 ring-gold/50 hover:bg-ink"
-          : "bg-ink/50 text-white/50 ring-1 ring-white/20 hover:text-white"
-      }`}
-    >
-      {enabled ? (
-        <span className={playing ? "animate-[spin_5s_linear_infinite]" : ""}>
-          <Music size={18} />
+    <div className="fixed bottom-6 right-6 z-50 flex items-center gap-3">
+      {awaitingUnlock && (
+        <span className="rounded-full bg-ink/80 px-3 py-1.5 text-xs uppercase tracking-wider text-gold shadow-lg backdrop-blur-sm">
+          Tap for sound
         </span>
-      ) : (
-        <VolumeX size={18} />
       )}
-    </button>
+      <button
+        onClick={toggle}
+        aria-label={enabled ? "Turn background music off" : "Turn background music on"}
+        title={enabled ? "Music on — click to turn off" : "Music off — click to turn on"}
+        className={`relative flex h-12 w-12 items-center justify-center rounded-full shadow-lg backdrop-blur-sm transition-all duration-300 ${
+          enabled
+            ? "bg-ink/80 text-gold ring-1 ring-gold/50 hover:bg-ink"
+            : "bg-ink/50 text-white/50 ring-1 ring-white/20 hover:text-white"
+        }`}
+      >
+        {awaitingUnlock && (
+          <span className="absolute inset-0 animate-ping rounded-full bg-gold/30" />
+        )}
+        {enabled ? (
+          <span className={playing ? "animate-[spin_5s_linear_infinite]" : ""}>
+            <Music size={18} />
+          </span>
+        ) : (
+          <VolumeX size={18} />
+        )}
+      </button>
+    </div>
   );
 }

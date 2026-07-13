@@ -39,7 +39,7 @@ export const categories: {
       "Couple & individual portraits",
       "Social media content add-ons",
     ],
-    cover: "/images/commercial/client-05.jpg",
+    cover: "/images/commercial/client-17.jpg",
   },
   {
     key: "maternity",
@@ -71,7 +71,7 @@ export const categories: {
       "Cinematic highlight film",
       "Same-day preview gallery",
     ],
-    cover: "/images/wedding/wedding-11.jpg",
+    cover: "/images/wedding/wedding-61.jpg",
   },
   {
     key: "corporate",
