@@ -34,15 +34,28 @@ export default function BackgroundMusic() {
         });
     };
 
-    // attempt autoplay immediately, otherwise on first interaction
+    // attempt autoplay immediately, otherwise on the first user gesture
+    // (browsers refuse audible playback until the visitor interacts once)
     tryPlay();
+    const unlockEvents = ["pointerdown", "touchend", "keydown", "wheel"] as const;
     const onFirstInteraction = () => {
-      tryPlay();
-      window.removeEventListener("pointerdown", onFirstInteraction);
-      window.removeEventListener("keydown", onFirstInteraction);
+      if (localStorage.getItem(STORAGE_KEY) === "off" || videosPlaying.current > 0) {
+        removeUnlockListeners();
+        return;
+      }
+      audio
+        .play()
+        .then(() => {
+          setPlaying(true);
+          removeUnlockListeners();
+        })
+        .catch(() => {
+          /* still blocked — keep listening for a stronger gesture */
+        });
     };
-    window.addEventListener("pointerdown", onFirstInteraction);
-    window.addEventListener("keydown", onFirstInteraction);
+    const removeUnlockListeners = () =>
+      unlockEvents.forEach((ev) => window.removeEventListener(ev, onFirstInteraction));
+    unlockEvents.forEach((ev) => window.addEventListener(ev, onFirstInteraction));
 
     // duck the music whenever any <video> on the page plays
     const onVideoPlay = (e: Event) => {
@@ -68,8 +81,7 @@ export default function BackgroundMusic() {
     return () => {
       audio.pause();
       audio.src = "";
-      window.removeEventListener("pointerdown", onFirstInteraction);
-      window.removeEventListener("keydown", onFirstInteraction);
+      removeUnlockListeners();
       document.removeEventListener("play", onVideoPlay, true);
       document.removeEventListener("pause", onVideoStop, true);
       document.removeEventListener("ended", onVideoStop, true);
@@ -79,12 +91,9 @@ export default function BackgroundMusic() {
   const toggle = () => {
     const audio = audioRef.current;
     if (!audio) return;
-    if (enabled) {
-      audio.pause();
-      setEnabled(false);
-      setPlaying(false);
-      localStorage.setItem(STORAGE_KEY, "off");
-    } else {
+    // if music isn't audibly playing (e.g. autoplay was blocked), the first
+    // click on the button should START it — never silently disable it
+    if (!playing) {
       setEnabled(true);
       localStorage.setItem(STORAGE_KEY, "on");
       if (videosPlaying.current === 0) {
@@ -93,6 +102,11 @@ export default function BackgroundMusic() {
           .then(() => setPlaying(true))
           .catch(() => {});
       }
+    } else {
+      audio.pause();
+      setEnabled(false);
+      setPlaying(false);
+      localStorage.setItem(STORAGE_KEY, "off");
     }
   };
 
