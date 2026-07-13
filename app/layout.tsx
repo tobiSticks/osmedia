@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Playfair_Display, Jost } from "next/font/google";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import BackgroundMusic from "@/components/BackgroundMusic";
 import "./globals.css";
 
 const playfair = Playfair_Display({
@@ -54,6 +55,7 @@ export default function RootLayout({
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />
+        <BackgroundMusic />
       </body>
     </html>
   );
