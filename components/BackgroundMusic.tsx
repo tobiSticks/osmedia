@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { Music, VolumeX } from "lucide-react";
 
 const VOLUME = 0.35;
-const STORAGE_KEY = "osm-bg-music";
+const STORAGE_KEY = "osm-bg-music-v2";
 
 export default function BackgroundMusic() {
   const audioRef = useRef<HTMLAudioElement | null>(null);
